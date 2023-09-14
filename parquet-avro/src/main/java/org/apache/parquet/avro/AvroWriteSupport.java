@@ -126,7 +126,7 @@ public class AvroWriteSupport<T> extends WriteSupport<T> {
   @Override
   public WriteContext init(Configuration configuration) {
     if (rootAvroSchema == null) {
-      this.rootAvroSchema = new Schema.Parser().parse(configuration.get(AVRO_SCHEMA));
+      this.rootAvroSchema = new Schema.Parser().setValidateDefaults(false).parse(configuration.get(AVRO_SCHEMA));
       this.rootSchema = new AvroSchemaConverter(configuration).convert(rootAvroSchema);
     }
 
