@@ -1,4 +1,4 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -117,7 +117,7 @@ public class AvroWriteSupport<T> extends WriteSupport<T> {
   @Override
   public WriteContext init(Configuration configuration) {
     if (rootAvroSchema == null) {
-      this.rootAvroSchema = new Schema.Parser().parse(configuration.get(AVRO_SCHEMA));
+      this.rootAvroSchema = new Schema.Parser().setValidateDefaults(false).parse(configuration.get(AVRO_SCHEMA));
       this.rootSchema = new AvroSchemaConverter().convert(rootAvroSchema);
     }
 
@@ -228,7 +228,7 @@ public class AvroWriteSupport<T> extends WriteSupport<T> {
     recordConsumer.endGroup();
   }
 
-  private void writeUnion(GroupType parquetSchema, Schema avroSchema, 
+  private void writeUnion(GroupType parquetSchema, Schema avroSchema,
                           Object value) {
     recordConsumer.startGroup();
 

@@ -1,4 +1,4 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -92,7 +92,7 @@ public class AvroReadSupport<T> extends ReadSupport<T> {
 
     String requestedProjectionString = configuration.get(AVRO_REQUESTED_PROJECTION);
     if (requestedProjectionString != null) {
-      Schema avroRequestedProjection = new Schema.Parser().parse(requestedProjectionString);
+      Schema avroRequestedProjection = new Schema.Parser().setValidateDefaults(false).parse(requestedProjectionString);
       projection = new AvroSchemaConverter(configuration).convert(avroRequestedProjection);
     }
 
@@ -118,13 +118,13 @@ public class AvroReadSupport<T> extends ReadSupport<T> {
 
     if (metadata.get(AVRO_READ_SCHEMA_METADATA_KEY) != null) {
       // use the Avro read schema provided by the user
-      avroSchema = new Schema.Parser().parse(metadata.get(AVRO_READ_SCHEMA_METADATA_KEY));
+      avroSchema = new Schema.Parser().setValidateDefaults(false).parse(metadata.get(AVRO_READ_SCHEMA_METADATA_KEY));
     } else if (keyValueMetaData.get(AVRO_SCHEMA_METADATA_KEY) != null) {
       // use the Avro schema from the file metadata if present
-      avroSchema = new Schema.Parser().parse(keyValueMetaData.get(AVRO_SCHEMA_METADATA_KEY));
+      avroSchema = new Schema.Parser().setValidateDefaults(false).parse(keyValueMetaData.get(AVRO_SCHEMA_METADATA_KEY));
     } else if (keyValueMetaData.get(OLD_AVRO_SCHEMA_METADATA_KEY) != null) {
       // use the Avro schema from the file metadata if present
-      avroSchema = new Schema.Parser().parse(keyValueMetaData.get(OLD_AVRO_SCHEMA_METADATA_KEY));
+      avroSchema = new Schema.Parser().setValidateDefaults(false).parse(keyValueMetaData.get(OLD_AVRO_SCHEMA_METADATA_KEY));
     } else {
       // default to converting the Parquet schema into an Avro schema
       avroSchema = new AvroSchemaConverter(configuration).convert(parquetSchema);
