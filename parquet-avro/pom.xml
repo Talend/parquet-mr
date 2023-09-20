@@ -21,21 +21,50 @@
     <groupId>org.apache.parquet</groupId>
     <artifactId>parquet</artifactId>
     <relativePath>../pom.xml</relativePath>
-    <version>1.15.2-SNAPSHOT</version>
+    <version>1.15.1</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>parquet-avro</artifactId>
-  <version>1.10.1-20230912-talend</version>
+  <version>1.15.1-20250407-talend</version>
   <packaging>jar</packaging>
 
   <properties>
-    <parquet.version>1.10.1</parquet.version>
+    <parquet.version>1.15.1</parquet.version>
+    <talend.nexus.url>https://artifacts-oss.talend.com</talend.nexus.url>
   </properties>
 
   <name>Apache Parquet Avro</name>
-  <url>https://parquet.apache.org</url>
+  <url>https://github.com/Talend/parquet-mr/tree/parquet-1.15.1-talend</url>
+
+  <!--
+  also please, take a look at (an original changes were made in scope of it):
+  https://github.com/Talend/parquet-mr/tree/wwang-talend/TDI-50138-avro
+  -->
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>talend_nexus_deployment</id>
+      <url>${talend.nexus.url}/nexus/content/repositories/TalendOpenSourceSnapshot/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </snapshotRepository>
+    <repository>
+      <id>talend_nexus_deployment</id>
+      <url>${talend.nexus.url}/nexus/content/repositories/TalendOpenSourceRelease/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </distributionManagement>
 
   <dependencies>
     <dependency>
@@ -51,7 +80,7 @@
     <dependency>
       <groupId>org.apache.parquet</groupId>
       <artifactId>parquet-common</artifactId>
-      <version>${project.version}</version>
+      <version>${parquet.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.avro</groupId>
