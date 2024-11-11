@@ -9,7 +9,7 @@
 
   <groupId>org.apache.parquet</groupId>
   <artifactId>parquet</artifactId>
-  <version>1.14.4-SNAPSHOT</version>
+  <version>1.14.3</version>
   <packaging>pom</packaging>
 
   <name>Apache Parquet MR</name>
